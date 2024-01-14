@@ -26,15 +26,16 @@ class detailbeliController extends Controller
         // echo "berhasil";
     }
 
-    public function dataB(string $id, string $id2)
+    public function dataB(Request $request)
     {
         $notrans = session('notrans');
         $detail = new tdetailbeli();
         $detail->notrans = $notrans;
-        $detail->id_barang = $id;
-        $detail->harga_beli = $id2;
+        $detail->id_barang = $request->id_barang;
+        $detail->harga_beli = $request->harga_awal;
         $detail->qty  = 1;
-        $detail->subtotal = $id2;
+        $detail->subtotal = $request->harga_awal;
+        // dd($detail);
         $detail->save();
         return redirect('/pembelian-detail');
     }
@@ -56,13 +57,12 @@ class detailbeliController extends Controller
         $detail = tdetailbeli::where('notrans', '=', session('notrans'))->get();
         foreach ($detail as $item) {
             $produk = Barang::find($item->id_barang);
+            $produk->harga_awal = $item->harga_beli;
             $produk->stok += $item->qty;
             $produk->update();
             $item->subtotal = $item->harga_beli * $item->qty;
             $item->update();
         }
-       
-       
         return redirect('pembelian')->with('success', 'Transaksi Berhasil');
     }
 

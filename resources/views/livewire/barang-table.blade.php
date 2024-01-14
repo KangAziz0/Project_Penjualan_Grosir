@@ -12,8 +12,8 @@
                 <th>No.Barang</th>
                 <th>Nama Barang</th>
                 <th>kategori</th>
-                <th>Harga Awal</th>
-                <th>Harga Jual</th>
+                <th>Harga_Awal</th>
+                <th>Harga_Jual</th>
                 <th>stok</th>
                 <th class="d-flex justify-content-center ">Aksi</th>
             </tr>
@@ -26,8 +26,8 @@
                 <td class="text-success">{{$barangs->id_barang}}</td>
                 <td>{{$barangs->nama_barang}}</td>
                 <td>{{$barangs->kategori->nama_kategori}}</td>
-                <td>{{'Rp. '. format_uang($barangs->harga_awal)}}</td>
-                <td>{{'Rp. '. format_uang($barangs->harga_jual)}}</td>
+                <td>{{$barangs->harga_awal}}</td>
+                <td>{{$barangs->harga_jual}}</td>
                 <td>{{$barangs->stok}}</td>
                 <td class="d-flex justify-content-center" style="gap: 2px;">
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalEdit{{$barangs->id_barang}}">
@@ -114,7 +114,7 @@
                                 </div>
                                
                                 <div class="mb-3">
-                                    <label class="form-label">Harga_awal</label>
+                                    <label class="form-label">Harga Awal</label>
                                     <input type="number" class="form-control  @error('harga_awal')
                 is-invalid @enderror" name="harga_awal" placeholder="Masukan HargaAwal" value="{{$barangs->harga_awal}}">
                                     @error('harga_awal')
@@ -122,7 +122,7 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Harga_jual</label>
+                                    <label class="form-label">Harga Jual</label>
                                     <input type="number" class="form-control  @error('harga_jual')
                 is-invalid @enderror" name="harga_jual" placeholder="Masukan HargaJual" value="{{$barangs->harga_jual}}">
                                     @error('harga_jual')

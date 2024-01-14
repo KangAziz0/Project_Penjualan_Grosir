@@ -132,9 +132,9 @@ Route::middleware(['auth','hakAkses:Petugas,Admin'])->group(function () {
     Route::get('/pembelian', [pembelianController::class, 'index']);
     Route::get('/pembelian/{id}/create', [pembelianController::class, 'create'])->name('pembelian.create');
     Route::get('/pembelian-detail', [detailbeliController::class, 'index']);
-    Route::get('/detail-barang/{id}/{id2}', [detailbeliController::class, 'dataB']);
+    Route::get('/detail-barang', [detailbeliController::class, 'dataB']);
     Route::get('/{id}/destroy-TS', [detailbeliController::class, 'destroy']);
-    Route::post('detail-store', [detailbeliController::class, 'store'])->name('detail.store');
+    Route::post('detail-store', [detailbeliController::class, 'storbarae'])->name('detail.store');
     // Route::post('coba/{id}', [detailbeliController::class, 'update'])->middleware('auth');
     Route::get('/test/{id}/{id1}', [pembelianController::class, 'lihatDetail']);
     // -------------------------------------END PEMBELIAN -------------------------------------------

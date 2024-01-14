@@ -67,7 +67,7 @@ class PenjualanController extends Controller
         $pembelian->totalbayar = $request->totalharga;
         $pembelian->bayar = $request->totalbayar;
         $pembelian->kembalian = $request->kembalian;
-        // dd($pembelian);;
+       
         if ($pembelian->kembalian < 0) {
             return back()->with('failed', 'Pembayaran Tidak Boleh Kurang Dari Total');
         }
@@ -75,7 +75,11 @@ class PenjualanController extends Controller
         $detail = tdetailjual::where('notrans', '=', session('notrans'))->get();
         foreach ($detail as $item) {
             $produk = Barang::find($item->id_barang);
+            // $stokKurang = Barang::find($item->id_barang)->where( $produk->stok -= $item->qty,'<',0);
             $produk->stok -= $item->qty;
+            if ($produk->stok < 0) {
+                return back()->with('failed','Stok Barang Ada Yang Kurang');
+            }
             $produk->update();
             $item->subtotal = $item->harga_jual * $item->qty;
             $item->update();

@@ -41,22 +41,22 @@
                                 <span class="invalid-feedback">{{$message}}</span>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label class="form-label">Harga Awal</label>
                                 <input type="number" class="form-control  @error('harga_awal')
                 is-invalid @enderror" name="harga_awal" placeholder="Masukan harga awal" value="{{old('harga_awal')}}" required>
                                 @error('harga_awal')
                                 <span class="invalid-feedback">{{$message}}</span>
                                 @enderror
-                            </div>
-                            <div class="mb-3">
+                            </div> -->
+                            <!-- <div class="mb-3">
                                 <label class="form-label">Harga Jual</label>
                                 <input type="number" class="form-control  @error('harga_jual')
                 is-invalid @enderror" name="harga_jual" placeholder="Masukan harga jual" value="{{old('harga_jual')}}" required>
                                 @error('harga_jual')
                                 <span class="invalid-feedback">{{$message}}</span>
                                 @enderror
-                            </div>
+                            </div> -->
                             <div class="mb-3">
                                 <label class="form-label">Stok</label>
                                 <input type="text" class="form-control  @error('stok')

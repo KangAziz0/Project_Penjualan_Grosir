@@ -19,8 +19,8 @@ class barangController extends Controller
     {
         $data['barang'] = Barang::with('kategori')->get();
         $data['kategori'] = kategori::select('id_kategori', 'nama_kategori')->get();
-        $data['pesan'] = Barang::where('stok','<=','15')->count();
-        $data['barang'] = Barang::where('stok','<=','15')->get();
+        $data['pesan'] = Barang::where('stok', '<=', '15')->count();
+        $data['barang'] = Barang::where('stok', '<=', '15')->get();
         return view('admin.master.barang', $data);
     }
 
@@ -41,15 +41,11 @@ class barangController extends Controller
             'id_barang' => 'required',
             'nama' => 'required',
             'id_kategori' => 'required',
-            'harga_awal' => 'required',
-            'harga_jual' => 'required',
             'stok' => 'required',
         ], [
             'id_barang' => 'Kolom id_barang Wajib Di Isi',
             'nama' => 'Kolom Barang Wajib Di Isi',
             'id_kategori' => 'Kolom Kategori Wajib Di Isi',
-            'harga_awal' => 'Kolom Harga_Awal Wajib Di Isi',
-            'harga_jual' => 'Kolom Harga_Jual Wajib Di Isi',
             'stok' => 'Kolom Stok Wajib Di Isi',
         ]);
         if ($validator->fails()) {
@@ -59,9 +55,10 @@ class barangController extends Controller
         $barang->id_barang = $request->id_barang;
         $barang->nama_barang = $request->nama;
         $barang->id_kategori = $request->id_kategori;
-        $barang->harga_awal = $request->harga_awal;
-        $barang->harga_jual = $request->harga_jual;
+        $barang->harga_awal = 0;
+        $barang->harga_jual = 0;
         $barang->stok = $request->stok;
+        // dd($barang);
         $barang->save();
         Activity('Tambah')->withProperties(['Data Barang' => $request->nama])->log('Menambah Data Barang');
 

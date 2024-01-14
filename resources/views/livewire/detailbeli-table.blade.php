@@ -2,15 +2,19 @@
     <div class="d-flex " style="justify-content: end;">
         <input type="text" class="form-control" style="width: 300px;" wire:model.live="search" placeholder="Cari Data">
     </div>
-
-    <table class="table table-striped mt-2">
+    <style>
+        .inputan {
+            border: none;
+        }
+    </style>
+    <table class="table table-bordered mt-2">
         <thead class="">
             <tr>
                 <th>Id</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
-                <th>Harga Beli</th>
                 <th>Stok</th>
+                <th>Harga Beli</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -21,16 +25,18 @@
 
             @foreach($barang as $data)
             <tr>
-                @if($data->stok <= 15) <td><?= $no++ ?></td>
-                    <td class="text-success">{{$data->id_barang}}</td>
-                    <td>{{$data->nama_barang}}</td>
-                    <td>{{$data->harga_awal}}</td>
-                    <td>{{$data->stok}}</td>
+                @if($data->stok <= 15) <form action="detail-barang">
+                    <td><?= $no++ ?></td>
+                    <td><input type="text" name="id_barang" class="text-success inputan" value="{{$data->id_barang}}"></td>
+                    <td><input type="text" name="nama_barang" class="inputan" value="{{$data->nama_barang}}"></td>
+                    <td><input type="text" name="stok" class="inputan" value="{{$data->stok}}"></td>
+                    <td><input type="text" name="harga_awal" class="text-success" required value="{{$data->harga_awal}}"></td>
                     <td>
-                        <a href="detail-barang/{{$data->id_barang}}/{{$data->harga_awal}}" class="btn btn-success btn-sm btn-flat">
+                        <button type="submit" class="btn btn-success btn-sm btn-flat">
                             <i class="fa-solid fa-check"></i> Pilih
-                        </a>
+                        </button>
                     </td>
+                    </form>
                     @endif
             </tr>
             @endforeach

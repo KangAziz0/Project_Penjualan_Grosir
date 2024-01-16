@@ -15,6 +15,7 @@
                 <th>Nama Barang</th>
                 <th>Stok</th>
                 <th>Harga Beli</th>
+                <th>Harga Jual</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -25,12 +26,14 @@
 
             @foreach($barang as $data)
             <tr>
-                @if($data->stok <= 15) <form action="detail-barang">
+                @if($data->stok <= 15) <form action="detail-barang" method="post">
+                    @csrf
                     <td><?= $no++ ?></td>
                     <td><input type="text" name="id_barang" class="text-success inputan" value="{{$data->id_barang}}"></td>
                     <td><input type="text" name="nama_barang" class="inputan" value="{{$data->nama_barang}}"></td>
-                    <td><input type="text" name="stok" class="inputan" value="{{$data->stok}}"></td>
-                    <td><input type="text" name="harga_awal" class="text-success" required value="{{$data->harga_awal}}"></td>
+                    <td><input type="text" name="stok" style="width: 100px;" class="inputan" value="{{$data->stok}}"></td>
+                    <td><input type="text" name="harga_awal"   class="text-success" required value="{{$data->harga_awal}}"></td>
+                    <td><input type="text" name="harga_jual" style="width: 200px;" class="text-success" required value="{{$data->harga_jual}}"></td>
                     <td>
                         <button type="submit" class="btn btn-success btn-sm btn-flat">
                             <i class="fa-solid fa-check"></i> Pilih

@@ -29,14 +29,22 @@ class detailbeliController extends Controller
     public function dataB(Request $request)
     {
         $notrans = session('notrans');
-        $detail = new tdetailbeli();
-        $detail->notrans = $notrans;
-        $detail->id_barang = $request->id_barang;
-        $detail->harga_beli = $request->harga_awal;
-        $detail->qty  = 1;
-        $detail->subtotal = $request->harga_awal;
-        // dd($detail);
-        $detail->save();
+        $detailbeli = new tdetailbeli();
+        $detailbeli->notrans = $notrans;
+        $detailbeli->id_barang = $request->id_barang;
+        $detailbeli->harga_beli = $request->harga_awal;
+        $detailbeli->qty  = 1;
+        $detailbeli->subtotal = $request->harga_awal;
+
+        if ($request->harga_jual < $request->harga_awal ) {
+            return back()->with('failed','Harga Jual Kurang');
+        }
+        
+        $detailjual = Barang::where('id_barang','=',$request->id_barang)->update([
+            'harga_jual' => $request->harga_jual,
+            'harga_awal' => $request->harga_awal
+        ]);
+        $detailbeli->save();
         return redirect('/pembelian-detail');
     }
 

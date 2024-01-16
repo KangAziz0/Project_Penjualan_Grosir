@@ -57,7 +57,7 @@ class barangController extends Controller
         $barang->id_kategori = $request->id_kategori;
         $barang->harga_awal = 0;
         $barang->harga_jual = 0;
-        $barang->stok = $request->stok;
+        $barang->stok = 0;
         // dd($barang);
         $barang->save();
         Activity('Tambah')->withProperties(['Data Barang' => $request->nama])->log('Menambah Data Barang');
@@ -94,6 +94,10 @@ class barangController extends Controller
         $data->harga_awal = $request->harga_awal;
         $data->harga_jual = $request->harga_jual;
         $data->stok = $request->stok;
+
+        if ($request->stok < 0 ) {
+            return back()->with('failed','Data Tidak Valid');
+        }
 
         // dd($data);
         $data->save();

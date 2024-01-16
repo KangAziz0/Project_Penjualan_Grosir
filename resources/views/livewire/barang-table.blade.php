@@ -12,8 +12,8 @@
                 <th>No.Barang</th>
                 <th>Nama Barang</th>
                 <th>kategori</th>
-                <th>Harga_Awal</th>
-                <th>Harga_Jual</th>
+                <th>Harga Awal</th>
+                <th>Harga Jual</th>
                 <th>stok</th>
                 <th class="d-flex justify-content-center ">Aksi</th>
             </tr>

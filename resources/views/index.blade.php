@@ -187,8 +187,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($barang as $data)
                                     <?php $no = 1; ?>
+                                    @foreach($barang as $data)
                                     <tr>
                                         <td>{{$no++}}</td>
                                         <td>{{$data->id_barang}}</td>
@@ -224,7 +224,7 @@
             @endif
 
             @yield('content')
-          
+
         </div>
         <!-- End Content -->
     </main>

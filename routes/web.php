@@ -74,6 +74,9 @@ Route::middleware(['auth','hakAkses:Admin'])->group(function () {
     // Kategori
     Route::get('/kategori', [kategoriController::class, 'index']);
     Route::post('/kategori', [kategoriController::class, 'store'])->name('kategori.store');
+    Route::put('update-k/{id}', [kategoriController::class, 'update']);
+    Route::get('{id}/destroy-k', [kategoriController::class, 'destroy']);
+
 
 
     // ------------------------------------ END DATA MASTER --------------------------------------

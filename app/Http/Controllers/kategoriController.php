@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class kategoriController extends Controller
 {
@@ -14,9 +15,9 @@ class kategoriController extends Controller
     public function index()
     {
         $data['kategori'] = kategori::all();
-        $data['pesan'] = Barang::where('stok','<=','15')->count();
-        $data['barang'] = Barang::where('stok','<=','15')->get();
-        return view('admin.master.kategori',$data);
+        $data['pesan'] = Barang::where('stok', '<=', '15')->count();
+        $data['barang'] = Barang::where('stok', '<=', '15')->get();
+        return view('admin.master.kategori', $data);
     }
 
     /**
@@ -36,7 +37,7 @@ class kategoriController extends Controller
         $kategori->nama_kategori = $request->nama;
         $kategori->save();
 
-        return redirect('/kategori')->with('success','Data Berhasil Di Tambahkan');
+        return redirect('/kategori')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
     /**
@@ -60,7 +61,10 @@ class kategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = DB::table('kategori')->where('id_kategori', '=', $id)->update([
+            'nama_kategori' => $request->kategori
+        ]);
+        return redirect('/kategori')->with('info', 'Data Berhasil Di Ubah');
     }
 
     /**
@@ -68,6 +72,8 @@ class kategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = kategori::where('id_kategori', $id);
+        $data->delete();
+        return redirect('/kategori')->with('danger', 'Data Berhasil Di Hapus');
     }
 }
